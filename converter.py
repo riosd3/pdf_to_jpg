@@ -16,7 +16,7 @@ def pdf_to_jpg(pdf_path: str, output_folder: str = 'output', prefix_name: str = 
         if response.lower() == 'y':
             for file in output_content:
                 print(f"Removing file: {file}")
-                os.remove(file)
+                os.remove(os.path.join(output_folder, file))
         else:
             print("Not recognize: {response}... Exitting")
             sys.exit(2)
@@ -49,10 +49,10 @@ if __name__ == "__main__":
 
 
     if args.output_folder and args.prefix_name:
-        pdf_to_jpg(pdf_path = args.filename, output_folder = args.out_dir, prefix_name = args.prefix_name)
+        pdf_to_jpg(pdf_path = args.filename, output_folder = args.output_folder, prefix_name = args.prefix_name)
         sys.exit(0)
     if args.output_folder:
-        pdf_to_jpg(pdf_path = args.filename, output_folder = args.out_dir)
+        pdf_to_jpg(pdf_path = args.filename, output_folder = args.output_folder)
         sys.exit(0)
     if args.prefix_name:
         pdf_to_jpg(pdf_path = args.filename, prefix_name = args.prefix_name)
