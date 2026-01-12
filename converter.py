@@ -26,9 +26,11 @@ def pdf_to_jpg(pdf_path: str, output_folder: str = 'output', prefix_name: str = 
 
     for page_num in range(doc.page_count):
         page = doc.load_page(page_num)
-        pix = page.get_pixmap()
+        zoom = 2.0
+        mat = fitz.Matrix(zoom, zoom)
+        pix = page.get_pixmap(matrix = mat)
         output_path = os.path.join(output_folder, f"{prefix_name}{page_num + 1}.jpg")
-        pix.save(output_path, jpg_quality = 95)
+        pix.save(output_path, jpg_quality = 90)
         print(f"Saved image: {output_path}")
 
 
